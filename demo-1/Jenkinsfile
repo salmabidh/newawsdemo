@@ -1,0 +1,25 @@
+pipeline{
+    agent any
+     environment {
+        PATH="/opt/apache-maven-3.6.3/bin:$PATH"
+        
+            }
+    stages{
+        stage("git"){
+            steps{
+                git credentialsId: 'github', url: 'https://github.com/salmabidh/awsjenkins.git'
+            }
+            
+        }
+        stage("build-code"){
+              steps{
+                 dir("/var/lib/jenkins/workspace/Developerjava/demo-1"){
+                 
+                 sh "mvn clean package"
+                 
+                 }
+                }
+              
+              }
+    }
+}
